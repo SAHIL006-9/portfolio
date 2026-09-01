@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahil — Cloud &amp; DevOps Engineer</title>
+<meta name="description" content="Portfolio of Sahil, an AWS Certified Solutions Architect and Cloud &amp; DevOps Engineer specializing in Kubernetes, Terraform, and CI/CD automation.">
+<meta name="theme-color" content="#F5F6F8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6F8;
+    --surface:#FFFFFF;
+    --surface-alt:#ECEFF3;
+    --ink:#12151C;
+    --ink-muted:#5B6472;
+    --border:#DCE1E6;
+    --accent:#0E6E55;
+    --accent-dark:#0A5343;
+    --accent-soft:#E1F0EA;
+    --radius:12px;
+    --content-width:1120px;
+    --font-sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+
+  h1,h2,h3,h4{ margin:0; font-weight:600; letter-spacing:-0.01em; }
+  p{ margin:0; }
+  ul{ margin:0; padding:0; list-style:none; }
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+  button{ font-family:inherit; }
+
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
+
+  .wrap{
+    max-width:var(--content-width);
+    margin:0 auto;
+    padding:0 1.75rem;
+  }
+
+  section{ scroll-margin-top:88px; }
+
+  .eyebrow-free-heading{ font-size:clamp(1.5rem,1.1rem + 1.6vw,2.15rem); }
+
+  /* ---------- Buttons & pills ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    padding:.8rem 1.5rem;
+    border-radius:8px;
+    font-size:.95rem;
+    font-weight:500;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn-primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .btn-primary:hover{ background:var(--accent-dark); border-color:var(--accent-dark); }
+  .btn-secondary{ background:transparent; color:var(--ink); border-color:var(--border); }
+  .btn-secondary:hover{ border-color:var(--ink); }
+  .btn-onDark{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .btn-onDark:hover{ background:#12876A; border-color:#12876A; }
+
+  .pill{
+    font-family:var(--font-mono);
+    font-size:.76rem;
+    padding:.32rem .62rem;
+    border-radius:6px;
+    background:var(--accent-soft);
+    color:var(--accent-dark);
+    display:inline-block;
+    line-height:1.3;
+    white-space:nowrap;
+  }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:.5rem; }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:60;
+    background:rgba(245,246,248,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:68px;
+    padding:.6rem 0;
+    flex-wrap:wrap;
+  }
+  .nav-logo{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:1.05rem;
+    text-decoration:none;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .nav-logo .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-muted);
+    font-size:.94rem;
+    transition:color .15s ease;
+    white-space:nowrap;
+  }
+  .nav-links a:hover,
+  .nav-links a.active{ color:var(--accent); }
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:var(--ink);
+    cursor:pointer;
+    padding:.4rem;
+  }
+
+  @media (max-width:760px){
+    .nav-inner{ flex-wrap:wrap; }
+    .nav-toggle{ display:flex; }
+    .nav-links{
+      flex-basis:100%;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    .nav-links.open{ max-height:420px; }
+    .nav-links a{
+      width:100%;
+      padding:.9rem 0;
+      border-top:1px solid var(--border);
+    }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:4.5rem 0 3.5rem;
+    background-image:
+      linear-gradient(rgba(18,21,28,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(18,21,28,0.05) 1px, transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 96%);
+    mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 96%);
+  }
+  .status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+    padding:.45rem .85rem;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:var(--surface);
+    font-size:.85rem;
+    color:var(--ink-muted);
+    margin-bottom:2rem;
+  }
+  .status-dot{
+    position:relative;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    flex-shrink:0;
+  }
+  .status-dot::after{
+    content:'';
+    position:absolute;
+    inset:-5px;
+    border-radius:50%;
+    border:1px solid var(--accent);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{ transform:scale(.5); opacity:.85; }
+    100%{ transform:scale(2.1); opacity:0; }
+  }
+
+  .hero h1{
+    font-size:clamp(2.1rem, 1.35rem + 3.2vw, 3.5rem);
+    line-height:1.1;
+    max-width:17ch;
+  }
+  .hero .lede{
+    max-width:58ch;
+    color:var(--ink-muted);
+    font-size:1.1rem;
+    line-height:1.65;
+    margin-top:1.4rem;
+  }
+  .cta-row{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-top:2.25rem;
+  }
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.5rem;
+    margin-top:4rem;
+    padding-top:2.25rem;
+    border-top:1px solid var(--border);
+  }
+  .stat-num{
+    font-family:var(--font-mono);
+    font-size:1.85rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .stat-label{
+    font-size:.85rem;
+    color:var(--ink-muted);
+    margin-top:.3rem;
+    line-height:1.4;
+  }
+  @media (max-width:640px){
+    .stats{ grid-template-columns:repeat(2,1fr); row-gap:2rem; }
+  }
+
+  /* ---------- Section shell ---------- */
+  .section{ padding:5rem 0; }
+  .section-alt{ background:var(--surface-alt); }
+  .section-head{ margin-bottom:2.75rem; max-width:60ch; }
+  .section-head p{ color:var(--ink-muted); margin-top:.75rem; font-size:1.02rem; line-height:1.6; }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:3rem;
+    align-items:start;
+  }
+  .about-text p{
+    color:var(--ink-muted);
+    font-size:1.06rem;
+    line-height:1.75;
+    max-width:62ch;
+  }
+  .about-text p + p{ margin-top:1.15rem; }
+  .facts-panel{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:1.6rem;
+  }
+  .fact{ padding:.85rem 0; border-bottom:1px solid var(--border); }
+  .fact:last-child{ border-bottom:none; padding-bottom:0; }
+  .fact:first-child{ padding-top:0; }
+  .fact dt{ font-size:.8rem; color:var(--ink-muted); margin-bottom:.35rem; }
+  .fact dd{ margin:0; font-size:.97rem; font-weight:500; color:var(--ink); }
+  .fact dd .pill-row{ margin-top:.1rem; }
+  @media (max-width:860px){
+    .about-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.25rem;
+  }
+  .skill-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:1.6rem;
+  }
+  .skill-card h3{ font-size:1rem; margin-bottom:1rem; }
+  @media (max-width:720px){
+    .skills-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Experience ---------- */
+  .exp-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:2.25rem;
+  }
+  .exp-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:.75rem;
+    margin-bottom:1.75rem;
+    padding-bottom:1.75rem;
+    border-bottom:1px solid var(--border);
+  }
+  .exp-role{ font-size:1.2rem; margin-bottom:.3rem; }
+  .exp-org{ color:var(--accent); font-weight:500; font-size:1rem; }
+  .exp-dates{
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    color:var(--ink-muted);
+    white-space:nowrap;
+  }
+  .dot-list{ display:grid; gap:1rem; }
+  .dot-list li{
+    position:relative;
+    padding-left:1.3rem;
+    color:var(--ink-muted);
+    line-height:1.6;
+    font-size:1rem;
+  }
+  .dot-list li::before{
+    content:'';
+    position:absolute;
+    left:0; top:.6em;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+  }
+  .project-card{
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:1.85rem;
+    transition:border-color .15s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .project-card:hover{ border-color:var(--accent); }
+  .project-card h3{ font-size:1.06rem; margin-bottom:.9rem; line-height:1.35; }
+  .project-card .pill-row{ margin-bottom:1.15rem; }
+  .project-card .dot-list{ gap:.75rem; }
+  .project-card .dot-list li{ font-size:.96rem; }
+  @media (max-width:860px){
+    .projects-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Credentials (certifications + education) ---------- */
+  .credentials-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.5rem;
+    margin-bottom:1.5rem;
+  }
+  .cred-card{
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:1.5rem;
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .15s ease;
+  }
+  .cred-card:hover{ border-color:var(--accent); }
+  .cred-icon{
+    width:42px; height:42px;
+    border-radius:9px;
+    background:var(--accent-soft);
+    color:var(--accent-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .cred-body h3{ font-size:1rem; margin-bottom:.3rem; }
+  .cred-body p{ font-size:.88rem; color:var(--ink-muted); line-height:1.5; }
+  .cred-link{
+    font-size:.82rem;
+    color:var(--accent);
+    margin-top:.6rem;
+    display:inline-flex;
+    align-items:center;
+    gap:.3rem;
+    font-weight:500;
+  }
+  .edu-card{ grid-column:1 / -1; }
+  @media (max-width:720px){
+    .credentials-grid{ grid-template-columns:1fr; }
+    .edu-card{ grid-column:auto; }
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-panel{
+    background:var(--ink);
+    color:#F5F6F8;
+    border-radius:22px;
+    padding:3.25rem 2.75rem;
+  }
+  .contact-panel h2{ color:#fff; font-size:clamp(1.5rem,1.1rem + 1.6vw,2.1rem); max-width:22ch; }
+  .contact-panel > p{ color:rgba(245,246,248,0.68); margin-top:.9rem; max-width:52ch; font-size:1.02rem; line-height:1.6; }
+  .contact-methods{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+    margin-top:2.5rem;
+  }
+  .contact-method{
+    display:flex;
+    align-items:center;
+    gap:.8rem;
+    padding:1.1rem 1.2rem;
+    border:1px solid rgba(245,246,248,0.16);
+    border-radius:10px;
+    text-decoration:none;
+    color:#F5F6F8;
+    transition:border-color .15s ease, background-color .15s ease;
+  }
+  .contact-method:hover{ border-color:var(--accent); background:rgba(14,110,85,0.18); }
+  .contact-method .cm-icon{
+    width:36px; height:36px;
+    border-radius:8px;
+    background:rgba(245,246,248,0.08);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-method .cm-label{ font-size:.78rem; color:rgba(245,246,248,0.55); }
+  .contact-method .cm-value{ font-size:.94rem; font-weight:500; margin-top:.15rem; }
+  @media (max-width:760px){
+    .contact-methods{ grid-template-columns:1fr; }
+    .contact-panel{ padding:2.25rem 1.6rem; }
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer{ padding:2.5rem 0 3rem; }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-size:.88rem;
+    color:var(--ink-muted);
+  }
+  .footer-mark{ font-family:var(--font-mono); color:var(--ink); font-weight:500; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="nav-logo"><span class="dot"></span>Sahil</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="status-pill"><span class="status-dot"></span>Open to Cloud &amp; DevOps opportunities</span>
+      <h1>Sahil builds cloud infrastructure that runs itself.</h1>
+      <p class="lede">Cloud &amp; DevOps Engineer based in New Delhi, India. AWS Certified Solutions Architect with hands-on experience across Docker, Kubernetes, Terraform, and CI/CD pipelines that ship straight to production.</p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-secondary">Get in touch</a>
+      </div>
+      <div class="stats">
+        <div>
+          <div class="stat-num">40%</div>
+          <div class="stat-label">Less manual infrastructure setup time</div>
+        </div>
+        <div>
+          <div class="stat-num">30%</div>
+          <div class="stat-label">Faster release cycles</div>
+        </div>
+        <div>
+          <div class="stat-num">99.9%</div>
+          <div class="stat-label">Uptime achieved in testing</div>
+        </div>
+        <div>
+          <div class="stat-num">35%</div>
+          <div class="stat-label">Faster incident detection (MTTD)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-text">
+        <h2 class="eyebrow-free-heading">About</h2>
+        <p style="margin-top:1.5rem;">Sahil is a Cloud &amp; DevOps Engineer who likes systems that run themselves — infrastructure that provisions, deploys, and monitors without someone babysitting it. He's an AWS Certified Solutions Architect who spent the past year at CETPA Infotech turning manual infrastructure setup into Terraform and CloudFormation, and building CI/CD pipelines with Jenkins that cut release time by nearly a third.</p>
+        <p>His personal projects push the same idea further: Kubernetes clusters on EKS that autoscale under simulated traffic spikes, a CI/CD pipeline that blocks vulnerable container images before they ship, and Grafana dashboards that catch problems before anyone has to go looking.</p>
+        <p>He graduated in Electronics and Communication Engineering in 2025 and is now looking for an entry-level DevOps Engineer or Cloud Engineer role where he can keep building infrastructure that's automated, observable, and easy to trust.</p>
+      </div>
+      <dl class="facts-panel">
+        <div class="fact">
+          <dt>Location</dt>
+          <dd>New Delhi, India</dd>
+        </div>
+        <div class="fact">
+          <dt>Education</dt>
+          <dd>B.Tech, Electronics &amp; Communication Engineering</dd>
+        </div>
+        <div class="fact">
+          <dt>Certified</dt>
+          <dd>AWS Solutions Architect – Associate</dd>
+        </div>
+        <div class="fact">
+          <dt>Open to</dt>
+          <dd class="pill-row">
+            <span class="pill">DevOps Engineer</span>
+            <span class="pill">Cloud Engineer</span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section section-alt" id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="eyebrow-free-heading">Skills</h2>
+        <p>The tools he reaches for most, grouped the way they show up in real infrastructure work.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Cloud platforms</h3>
+          <div class="pill-row">
+            <span class="pill">AWS EC2</span><span class="pill">S3</span><span class="pill">IAM</span><span class="pill">VPC</span><span class="pill">EKS</span><span class="pill">ECS</span><span class="pill">ECR</span><span class="pill">Lambda</span><span class="pill">CloudWatch</span><span class="pill">RDS</span><span class="pill">CloudFormation</span><span class="pill">Azure AKS</span><span class="pill">Azure Monitor</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Containerization &amp; orchestration</h3>
+          <div class="pill-row">
+            <span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">Helm</span><span class="pill">NGINX</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>CI/CD &amp; automation</h3>
+          <div class="pill-row">
+            <span class="pill">Jenkins</span><span class="pill">GitHub Actions</span><span class="pill">Git</span><span class="pill">Webhooks</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Infrastructure as code</h3>
+          <div class="pill-row">
+            <span class="pill">Terraform</span><span class="pill">Ansible</span><span class="pill">AWS CloudFormation</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Monitoring &amp; observability</h3>
+          <div class="pill-row">
+            <span class="pill">Prometheus</span><span class="pill">Grafana</span><span class="pill">CloudWatch</span><span class="pill">Elasticsearch</span><span class="pill">Logstash</span><span class="pill">Kibana</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Scripting &amp; languages</h3>
+          <div class="pill-row">
+            <span class="pill">Python</span><span class="pill">Bash</span><span class="pill">YAML</span><span class="pill">Shell</span>
+          </div>
+        </div>
+        <div class="skill-card" style="grid-column:1 / -1;">
+          <h3>Networking</h3>
+          <div class="pill-row">
+            <span class="pill">TCP/IP</span><span class="pill">DNS</span><span class="pill">VPC networking</span><span class="pill">Load balancers</span><span class="pill">Security groups</span><span class="pill">Subnets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="eyebrow-free-heading">Experience</h2>
+      </div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div>
+            <div class="exp-role">Cloud &amp; DevOps Engineer</div>
+            <div class="exp-org">CETPA Infotech Pvt. Ltd., Noida, India</div>
+          </div>
+          <div class="exp-dates">July 2025 – August 2026</div>
+        </div>
+        <ul class="dot-list">
+          <li>Deployed and managed cloud infrastructure across AWS services (EC2, S3, IAM, VPC, Lambda, CloudWatch), supporting 3+ web applications in a staging environment.</li>
+          <li>Provisioned and version-controlled cloud infrastructure using Terraform and AWS CloudFormation, reducing manual setup time by approximately 40%.</li>
+          <li>Built and maintained CI/CD pipelines using Jenkins and GitHub, automating build, test, and deployment workflows and cutting release cycle time by 30%.</li>
+          <li>Containerized microservices using Docker and orchestrated deployments on AWS EKS and Azure AKS, enabling zero-downtime rolling updates.</li>
+          <li>Configured monitoring dashboards in Amazon CloudWatch and Azure Monitor to track resource utilization, set alerting thresholds, and reduce mean time to detection (MTTD) for infrastructure issues.</li>
+          <li>Managed Git branching strategies (Gitflow) across a team environment, maintaining clean version histories and reducing merge conflicts.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section section-alt" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="eyebrow-free-heading">Projects</h2>
+        <p>Independent builds that carry the same automation-first approach into new problems.</p>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <h3>Containerized Web Application Deployment on AWS</h3>
+          <div class="pill-row">
+            <span class="pill">Docker</span><span class="pill">ECR</span><span class="pill">EC2/ECS</span><span class="pill">NGINX</span>
+          </div>
+          <ul class="dot-list">
+            <li>Dockerized a full-stack web application, pushed the image to Amazon ECR, and deployed on EC2 and ECS behind an NGINX reverse proxy, reaching 99.9% uptime in testing.</li>
+            <li>Configured auto-scaling and load balancing, cutting response latency by 25% under simulated peak traffic.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <h3>Automated Tech Blog &amp; LinkedIn Publishing Pipeline</h3>
+          <div class="pill-row">
+            <span class="pill">Python</span><span class="pill">Gemini API</span><span class="pill">RSS/Atom</span><span class="pill">OAuth 2.0</span><span class="pill">LinkedIn API</span>
+          </div>
+          <ul class="dot-list">
+            <li>Built an unattended pipeline that aggregates cloud/DevOps news, dedupes and ranks stories by relevance, authority, and recency, then selects the day's most consequential story.</li>
+            <li>Generates source-grounded blog and LinkedIn posts with Gemini, gated by a fail-closed fact-verification step combining deterministic checks and AI claim auditing before publishing via LinkedIn OAuth 2.0.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <h3>Scalable Microservices Architecture with Kubernetes on EKS</h3>
+          <div class="pill-row">
+            <span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">AWS EKS</span><span class="pill">Helm</span>
+          </div>
+          <ul class="dot-list">
+            <li>Designed and deployed a 5-service microservices application on EKS, implementing Horizontal Pod Autoscaler for automatic scaling.</li>
+            <li>Enabled rolling, zero-downtime deployments that held up through a 3x simulated traffic spike.</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <h3>Automated CI/CD Pipeline: GitHub to EKS</h3>
+          <div class="pill-row">
+            <span class="pill">Jenkins</span><span class="pill">Docker</span><span class="pill">ECR</span><span class="pill">EKS</span><span class="pill">GitHub Webhooks</span>
+          </div>
+          <ul class="dot-list">
+            <li>Built an end-to-end pipeline (GitHub → Jenkins → Docker → ECR → EKS/ECS) with webhook triggers, completing build, test, image push, and deploy in under 8 minutes per release.</li>
+            <li>Integrated Trivy container security scanning to block vulnerable images before deployment, reducing security review time.</li>
+          </ul>
+        </div>
+
+        <div class="project-card" style="grid-column:1 / -1;">
+          <h3>Application Monitoring Dashboard</h3>
+          <div class="pill-row">
+            <span class="pill">Grafana</span><span class="pill">CloudWatch</span><span class="pill">Prometheus</span><span class="pill">ELK Stack</span>
+          </div>
+          <ul class="dot-list">
+            <li>Created a centralized Grafana dashboard integrating CloudWatch metrics to track CPU utilization, memory, pod health, and application logs across 3 microservices.</li>
+            <li>Configured alert rules on threshold breaches, enabling proactive incident response and cutting average MTTD by approximately 35%.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials: Certifications + Education -->
+  <section class="section" id="credentials">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="eyebrow-free-heading">Credentials</h2>
+      </div>
+      <div class="credentials-grid">
+        <a class="cred-card" href="https://www.credly.com/badges/4df8be41-ab2c-417e-9203-c7e9bba24cf7/public_url" target="_blank" rel="noopener noreferrer">
+          <span class="cred-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
+          </span>
+          <span class="cred-body">
+            <h3>AWS Certified Solutions Architect – Associate</h3>
+            <p>Amazon Web Services</p>
+            <span class="cred-link">View credential
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            </span>
+          </span>
+        </a>
+        <a class="cred-card" href="https://www.credly.com/badges/9b51280d-2e64-4cc8-ae46-9b10a5587344/public_url" target="_blank" rel="noopener noreferrer">
+          <span class="cred-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
+          </span>
+          <span class="cred-body">
+            <h3>Network Support and Security</h3>
+            <p>Cisco</p>
+            <span class="cred-link">View credential
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            </span>
+          </span>
+        </a>
+        <div class="cred-card edu-card">
+          <span class="cred-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+          </span>
+          <span class="cred-body">
+            <h3>B.Tech, Electronics &amp; Communication Engineering</h3>
+            <p>Dr. APJ Abdul Kalam Technical University, Uttar Pradesh, India — 2021 to 2025</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-panel">
+        <h2>Building a team's infrastructure is easier with another set of hands.</h2>
+        <p>Open to entry-level DevOps Engineer and Cloud Engineer roles — happy to talk through any of the projects above in more detail.</p>
+        <div class="contact-methods">
+          <a class="contact-method" href="mailto:meetsahilsaifi01@gmail.com">
+            <span class="cm-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+            </span>
+            <span>
+              <span class="cm-label" style="display:block;">Email</span>
+              <span class="cm-value" style="display:block;">meetsahilsaifi01@gmail.com</span>
+            </span>
+          </a>
+          <a class="contact-method" href="tel:+917453017763">
+            <span class="cm-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span>
+              <span class="cm-label" style="display:block;">Phone</span>
+              <span class="cm-value" style="display:block;">+91 74530 17763</span>
+            </span>
+          </a>
+          <a class="contact-method" href="https://www.linkedin.com/in/sahil-1623aa317/" target="_blank" rel="noopener noreferrer">
+            <span class="cm-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            </span>
+            <span>
+              <span class="cm-label" style="display:block;">LinkedIn</span>
+              <span class="cm-value" style="display:block;">/in/sahil-1623aa317</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span class="footer-mark">Sahil</span>
+    <span>New Delhi, India · © <span id="year"></span></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+
+  if (toggle && links) {
+    toggle.addEventListener('click', function(){
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('.nav-links a');
+  function setActive(id){
+    navLinks.forEach(function(l){
+      var match = l.getAttribute('href') === '#' + id;
+      l.classList.toggle('active', match);
+    });
+  }
+  if ('IntersectionObserver' in window && sections.length) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
