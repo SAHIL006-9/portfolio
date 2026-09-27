@@ -1040,12 +1040,20 @@
 
     counter.up('portfolio-views')
       .then(function(result){
-        var liveCount = Number(result.value);
+        // CounterAPI V2 returns the count inside result.data.up_count.
+        // Keep result.value as a fallback for older response shapes.
+        var liveCount = Number(
+          result && result.data && result.data.up_count != null
+            ? result.data.up_count
+            : result && result.value
+        );
+
         if (Number.isFinite(liveCount)) {
           counterEl.textContent = String(BASE_VIEWS + liveCount);
         }
       })
-      .catch(function(){
+      .catch(function(error){
+        console.error('Portfolio counter error:', error);
         // Keep the starting value of 240 if the counter service is unavailable.
       });
   })();
