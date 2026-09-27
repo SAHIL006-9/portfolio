@@ -1024,38 +1024,36 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
   'use strict';
 
-  /* ---------- Live portfolio visitor counter ---------- */
+  /* ---------- Live portfolio visitor counter ----------
+     Uses CounterAPI.com public counter (no account/token required).
+     Every page load increments the same counter and the returned value
+     already includes the 240 starting baseline.
+  */
   (function initPortfolioCounter(){
     var counterEl = document.getElementById('portfolioViews');
-    if (!counterEl || typeof Counter === 'undefined') return;
+    if (!counterEl) return;
 
-    var BASE_VIEWS = 240;
-    var counter = new Counter({ workspace:'sahil-cloud-devops-portfolio-2026' });
+    counterEl.textContent = '240';
 
-    counter.up('portfolio-views')
-      .then(function(result){
-        // CounterAPI V2 returns the count inside result.data.up_count.
-        // Keep result.value as a fallback for older response shapes.
-        var liveCount = Number(
-          result && result.data && result.data.up_count != null
-            ? result.data.up_count
-            : result && result.value
-        );
+    // JSONP avoids browser CORS issues on GitHub Pages/static hosting.
+    window.__sahilPortfolioCounter = function(response){
+      if (response && Number.isFinite(Number(response.value))) {
+        counterEl.textContent = String(Number(response.value));
+      }
+    };
 
-        if (Number.isFinite(liveCount)) {
-          counterEl.textContent = String(BASE_VIEWS + liveCount);
-        }
-      })
-      .catch(function(error){
-        console.error('Portfolio counter error:', error);
-        // Keep the starting value of 240 if the counter service is unavailable.
-      });
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://counterapi.com/api/sahil-cloud-devops-portfolio/view/portfolio-views?startNumber=240&callback=__sahilPortfolioCounter';
+    script.onerror = function(){
+      console.warn('Portfolio counter service unavailable; showing 240.');
+    };
+    document.head.appendChild(script);
   })();
 
   /* ---------- Resume download (embedded PDF, works offline / when published) ---------- */
